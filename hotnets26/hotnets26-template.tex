@@ -1,0 +1,254 @@
+\documentclass[sigconf, 10pt, anonymous, nonacm]{acmart}
+\settopmatter{printfolios=true, printccs=false, printacmref=false}
+
+\title{When Measurements Become Targets: The Strategic Manipulation Challenge for Internet Observatories}
+
+\author{First Author}
+\affiliation{%
+  \institution{First Institution}
+  \city{City}
+  \country{Country}
+}
+
+\author{Second Author}
+\affiliation{%
+  \institution{Second Institution}
+  \city{City}
+  \country{Country}
+}
+
+\begin{abstract}
+Internet observatories increasingly influence reputation, compliance assessments, and business relationships across the Internet ecosystem. Yet many of these observatories depend on measurement infrastructures that are public, long-lived, and therefore potentially recognizable to the networks they evaluate. As favorable measurement outcomes become increasingly valuable, operators may have incentives to optimize specifically for measurement platforms while behaving differently toward ordinary users and traffic. We refer to this phenomenon as \emph{measurement awareness} and argue that it represents an emerging challenge for Internet measurement.
+
+Using Route Origin Validation (ROV) as a case study, we compare observations obtained using publicly known RPKI-invalid targets with those obtained using functionally equivalent but undisclosed shadow targets. We identify networks exhibiting behavior consistent with measurement awareness, rejecting well-known invalid prefixes while continuing to accept equivalent shadow prefixes. Our findings suggest that Internet observatories may not always capture the properties they intend to measure, but rather the behavior networks choose to expose to the measurement infrastructure.
+\end{abstract}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Internet measurement plays a central role in understanding the operational state of the network. Researchers, operators, regulators, and policymakers rely on measurement studies to evaluate properties ranging from performance and reliability to routing security and censorship. Over time, the community has developed large-scale observatories and measurement platforms that provide visibility into these aspects of Internet behavior and enable longitudinal studies across diverse environments.
+
+A common challenge across these efforts is obtaining measurement vantage points that are sufficiently diverse, accessible, and reproducible. Geographic coverage, topological diversity, and experimental control are all desirable properties, yet satisfying them simultaneously is difficult in practice. As a result, a substantial fraction of Internet measurement research depends on a relatively small collection of shared infrastructures and observatories.
+
+Although alternative techniques based on side channels ~\cite{ipid,ipv6} can sometimes extend visibility beyond dedicated measurement infrastructures, they often provide limited experimental control and may disappear as implementations evolve ~\cite{rscope}. In contrast, many research questions require measurements that remain comparable over months or even years, making continuity and stability valuable properties of measurement platforms.
+
+The influence of these observatories increasingly extends beyond academic research. Measurements are routinely incorporated into security assessments, compliance initiatives, operational decisions, and commercial relationships. Consequently, favorable measurement outcomes can carry reputational and economic value for the networks being evaluated.
+
+This evolution introduces an implicit assumption: that networks behave consistently regardless of who is observing them. In most studies, measurements are interpreted as reflecting the actual policies deployed by the network under observation rather than policies selectively exposed to the measurement process itself.
+
+However, the characteristics that make Internet observatories attractive to researchers can also make them distinguishable to measured networks. Public documentation, repeated use of the same infrastructure, and predictable experimental methodologies may allow operators to recognize measurement activity and react differently to it than they would to ordinary traffic.
+
+If such differentiation is possible, Internet observatories become vulnerable to strategic behavior. Rather than deploying a mechanism uniformly across their networks, operators may instead choose to optimize specifically for the environments in which they know they are evaluated. This possibility raises a broader question for the measurement community: to what extent do Internet observatories capture intrinsic network properties, and to what extent do they capture behavior conditioned on the presence of measurement infrastructure?
+
+In this paper, we investigate this question through the lens of routing security measurements and explore its implications for the design and interpretation of Internet observatories.
+
+Our contributions are fourfold:
+
+\begin{itemize}
+
+\item We introduce the notion of \emph{measurement-aware networks}, in which operators recognize measurement activity and selectively adapt their behavior to influence observed outcomes.
+
+\item We propose a paired-target methodology based on publicly known and undisclosed measurement targets for detecting measurement-aware behavior.
+
+\item We develop a prefix selection and ranking strategy for identifying representative public and shadow targets in ROV measurements.
+
+\item Using ROV as a case study, we identify networks exhibiting behavior consistent with measurement awareness by treating publicly known and shadow RPKI-invalid prefixes differently.
+
+\end{itemize}
+
+The remainder of this paper is organized as follows. Section~2 introduces measurement-aware networks and presents our threat model. Section~3 describes our paired-target methodology and the ROV case study used to identify measurement-aware behavior. Section~4 discusses implications beyond routing security and outlines possible mitigation strategies. Finally, Section~5 concludes the paper.
+
+\section{Measurement-Aware Networks}
+
+Internet measurements implicitly rely on an \emph{invariance assumption}: that networks behave identically regardless of whether they are interacting with ordinary traffic or participating in a measurement experiment. Under this assumption, observations made by measurement platforms accurately reflect the policies and mechanisms deployed by the measured network.
+
+We argue that this assumption may no longer hold in environments where measurement outcomes influence reputation, compliance assessments, or business relationships. If a network operator can identify measurement activity and derive value from favorable results, it may have incentives to selectively modify its behavior toward measurement traffic.
+
+We define a \emph{measurement-aware network} as a network that can recognize measurement activity and adapt its behavior in order to influence the resulting observations. Such adaptations may include selectively filtering routes, modifying forwarding behavior, prioritizing traffic, or altering reachability outcomes only for traffic associated with known measurement infrastructures.
+
+Measurement-aware behavior introduces a new source of bias into Internet observatories by making the measurement process itself part of the system being optimized against. As a result, observed behavior may reflect a network's response to the measurement infrastructure rather than the underlying property the measurement seeks to characterize.
+
+\subsection{Threat Model}
+
+We consider an adversary that is a network operator (or Autonomous System) seeking to influence measurements targeting its network.
+
+\textbf{Adversary knowledge.} The adversary has access only to information that is publicly available or externally observable, including measurement infrastructure addresses, probe locations, published methodologies, and traffic characteristics associated with measurement campaigns. No privileged access to measurement platforms or researchers' systems is assumed.
+
+\textbf{Adversary capabilities.} The adversary can distinguish measurement traffic from ordinary traffic and apply different policies to the two classes. Such policies may include selectively filtering routes, modifying forwarding behavior, prioritizing traffic, or altering reachability outcomes.
+
+\textbf{Adversary goal.} The adversary aims to obtain favorable measurement results without uniformly deploying the corresponding mechanisms throughout its network. To achieve this objective, it selectively applies the desired behavior only to traffic identified as belonging to a measurement campaign, causing the observatory to infer properties that do not necessarily reflect normal network operation.
+
+This threat model requires neither insider knowledge nor specialized capabilities. Identifying traffic classes and applying differentiated policies are common operational practices in modern networks, making measurement-aware behavior feasible using existing mechanisms.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=1\textwidth]{./figures/methodology.png}
+\caption{Conceptual overview of a measurement-aware AS (MA-AS). The MA-AS identifies traffic associated with publicly known measurement infrastructure and selectively applies crafted filters to influence measurement outcomes in its favor. The resulting observations are incorporated into compliance and reputation frameworks, creating incentives for strategic behavior and establishing a feedback loop in which published measurements influence future network policies.}
+\label{fig}
+\end{figure*}
+
+Importantly, implementing such behavior does not require sophisticated capabilities. The filtering logic illustrated in Figure~\ref{fig} can be realized using standard access control lists (ACLs) or policy rules already supported by commodity routers and network operating systems. Our prototype implementation uses Cisco router configurations as an illustrative example, although equivalent mechanisms are available across all major routing platforms.
+
+\subsection{Identifiable Measurement Setups}
+
+Internet measurement infrastructures often expose information that allows measured networks to recognize measurement activity. Depending on the methodology, this information may include probe addresses and locations such as Ripe Atlas and CAIDA Arc monitors ~\cite{ripeatlas,caida_ark}, observation vantage points such as BGP collectors~\cite{ripe_ris,routeviews}, test destinations, or announced prefixes used in experiments. In many cases, these components are intentionally disclosed to support reproducibility and facilitate independent validation of results.
+
+Previous work has shown that adversaries can exploit knowledge of monitoring infrastructure to evade detection from known vantage points~\cite{global_bgp_attacks,sico}. Similar observations suggest that measurement infrastructures themselves may become identifiable targets for strategic behavior.
+
+Identification does not necessarily require explicit disclosure of the measurement setup. Measurement campaigns frequently exhibit characteristic signatures, including periodic probing patterns, coordinated experiments originating from multiple locations, and repeated interactions with the same destinations. By observing such patterns over time, network operators may infer previously unknown measurement endpoints and expand their knowledge of the underlying measurement infrastructure.
+
+\subsection{Detection Methodology}
+
+Detecting measurement-aware behavior is inherently challenging because researchers typically observe only measurement outcomes and cannot directly determine whether a network behaved differently in response to the measurement process itself.
+
+To address this challenge, we propose a paired-target methodology based on two functionally equivalent measurement targets. The first is a \emph{public target}, namely a destination, prefix, or service that is publicly associated with the measurement platform and therefore potentially recognizable to the measured network. The second is a \emph{shadow target}, which provides an equivalent measurement function but is not publicly associated with the measurement campaign.
+
+Measurements are performed simultaneously toward both targets under identical experimental conditions. Under normal operation, a network applying a uniform policy should exhibit equivalent behavior toward the public and shadow targets. In contrast, systematic discrepancies between the two observations may indicate that the network is adapting its behavior based on recognition of the measurement infrastructure rather than applying a consistent operational policy.
+
+The specific realization of public and shadow targets depends on the measurement domain. In the remainder of this paper, we instantiate this methodology using ROV measurements based on publicly known and undisclosed RPKI-invalid prefixes.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{./figures/reachability.png}
+\caption{Reachability of RPKI-invalid test prefixes from unique source ASes. Reachability varies substantially across prefixes, ranging from 12\% to 66\%. The large differences in coverage motivate the need for careful target selection when designing ROV measurements and selecting public and shadow targets.}
+\label{fig:invalid_prefix_visibility}
+\end{figure}
+
+\section{ROV Case Study}
+
+ROV ~\cite{rov} uses Route Origin Authorizations (ROAs) ~\cite{roa} published through the Resource Public Key Infrastructure (RPKI)~\cite{rpki} to validate the origin AS of BGP announcements. Routes are classified as \emph{Valid}, \emph{Invalid}, or \emph{Unknown}, and operators may reject or de-preference routes classified as invalid.
+
+Several measurement platforms infer ROV deployment by comparing the reachability of valid and invalid prefixes from distributed vantage points. Such approaches typically rely on a small number of publicly known test prefixes or measurement infrastructures~\cite{rovista,apnic_rpki_stats,isbgpsafeyet}. As a result, these destinations may themselves become identifiable components of the measurement setup.
+
+Recent systems such as RScope ~\cite{rscope} have substantially improved the accuracy of ROV measurements by addressing limitations of earlier methodologies. However, even these approaches continue to depend on a limited set of test prefixes. For example, RScope uses the documentation prefix \texttt{2001:db8::/32} for IPv6 experiments, while practical constraints such as IPv4 address scarcity limit the diversity of available invalid prefixes. Consequently, the same measurement targets are often reused across studies and over long periods of time, increasing their visibility to measured networks.
+
+ROV therefore provides a natural case study for measurement awareness. A network seeking favorable ROV scores could selectively filter well-known invalid prefixes while continuing to accept equivalent invalid routes that are not publicly associated with measurement campaigns. Existing observatories would interpret such behavior as evidence of ROV deployment despite the absence of uniform filtering policies.
+
+To investigate this possibility, we compare observations obtained using publicly known invalid prefixes with observations obtained using equivalent shadow targets. Figure~\ref{fig} shows the fraction of source ASes that can reach each candidate invalid prefix. Reachability varies substantially across targets, ranging from approximately 12\% to 66\% of source ASes. This variability highlights an additional challenge for ROV measurements: different invalid prefixes may expose different portions of the Internet, making measurement outcomes sensitive to the choice of target itself.
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1\linewidth]{./figures/rovista_visibility.png}
+\caption{RPKI-invalid test prefixes used by RoVista between January 2023 and June 2026. The number of active invalid targets decreases over time, with only five prefixes remaining active since January 2026. The limited and stable set of measurement targets increases their visibility to measured networks and may facilitate measurement-aware behavior.}
+\label{fig:rovista_visibility}
+\end{figure}
+
+\subsection{Selecting Public and Shadow Targets}
+
+Applying the paired-target methodology to ROV requires invalid prefixes that are both broadly reachable and representative of diverse routing conditions. To identify suitable candidates, we collect RPKI-invalid prefixes observed across multiple BGP collectors using bgproutes.io ~\cite{bgproutes.io} and rank them according to a \emph{Prefix Reachability Score} (PRS).
+
+\begin{equation}
+PRS = w_1 \cdot V + w_2 \cdot G + w_3 \cdot C + w_4 \cdot P
+\end{equation}
+
+where $V$ denotes prefix visibility, $G$ the geographic diversity of observing collectors, $C$ the diversity of collector ASes, and $P$ the diversity of observed AS paths. All components are normalized to the range $[0,100]$ and weighted equally.
+
+The PRS favors prefixes that are visible from many vantage points and through diverse routing paths, increasing the likelihood that they expose a representative portion of the Internet. We further exclude prefixes whose observed reachability could be explained by covering valid or unknown routes rather than the invalid prefix itself.
+
+Candidate prefixes are then grouped into high-, medium-, and low-reachability categories according to their PRS (Table~\ref{tab:prefixes}). For each invalid target, we additionally select a corresponding valid prefix with similar reachability and routing characteristics to ensure that observed differences are not artifacts of target selection.
+
+Our measurement-aware analysis focuses on the high-reachability category. Publicly known invalid prefixes propagated through Cloudflare's infrastructure and widely used by existing ROV measurement efforts serve as public targets, while the remaining high-reachability prefixes serve as shadow targets. Because both classes are propagated through Cloudflare's anycast infrastructure, they exhibit highly similar control-plane and data-plane characteristics and comparable global reachability. In all observed BGP routes for the selected prefixes, AS13335 appears as the immediate upstream AS, and traceroute measurements terminate within Cloudflare's network without traversing additional external ASes. Consequently, differences observed between public and shadow measurements are unlikely to result from routing artifacts and are more likely to reflect differential treatment by the measured network. Medium- and low-reachability prefixes are retained to evaluate the effect of target selection on measurement coverage.
+
+\begin{table}[t]
+\centering
+\caption{RPKI-invalid prefixes considered in this study, grouped by visibility score.}
+\label{tab:prefixes}
+\footnotesize
+\begin{tabular}{lrc}
+\hline
+\textbf{Prefix} & \textbf{Origin AS} & \textbf{Score} \\
+\hline
+
+\rowcolor[HTML]{EFEFEF}
+\multicolumn{3}{c}{\textit{High-reachability targets}} \\
+188.164.158.0/23 & 209242 & 67.58 \\
+154.207.88.0/24 & 63888 & 66.77 \\
+103.21.244.0/24 & 13335 & 66.52 \\
+213.219.247.0/24 & 209242 & 63.46 \\
+91.124.127.0/24 & 209242 & 62.72 \\
+2606:4700:7000::/48 & 13335 & 56.47 \\
+%45.202.113.0/24 & 209242 & 62.35 \\
+\hline
+
+\rowcolor[HTML]{EFEFEF}
+\multicolumn{3}{c}{\textit{Medium-reachability targets}} \\
+46.16.33.0/24 & 208890 & 38 \\
+2605:59c0:5020::/48 & 45700 & 35.62 \\
+%2401:e320:1000::/48 & 45700 & XX \\
+
+%193.228.162.0/24 & 208890 & XX \\
+\hline
+
+\rowcolor[HTML]{EFEFEF}
+\multicolumn{3}{c}{\textit{Low-reachability targets (RoVista)}} \\
+193.43.75.0/24 & 202125 & 22.21 \\
+%185.247.167.0/24 & 202125 & XX \\
+\hline
+
+\end{tabular}
+\end{table}
+
+\subsection{Detecting Measurement-Aware ROV Deployment}
+
+We compare behavior toward publicly known ROV measurement targets and a set of shadow RPKI-invalid prefixes that are not publicly associated with any measurement platform.
+
+Measurements are performed using RIPE Atlas traceroutes toward both target classes. Traceroute interfaces are mapped to ASes using Prefix2Org ~\cite{prefix2org} datasets and supplemented with PeeringDB and PCH ~\cite{peeringdb,pch} information to account for IXP traversals.
+
+We classify an AS as exhibiting behavior consistent with measurement awareness if:
+
+\begin{enumerate}
+\item traffic toward the public invalid target is filtered;
+\item all shadow invalid targets remain reachable; and
+\item the AS path observed toward the shadow targets is consistent with the path observed toward the corresponding valid targets.
+\end{enumerate}
+
+Because such behavior is likely implemented at individual routers or points of presence rather than uniformly across an AS, different RIPE Atlas probes within the same network may observe different outcomes. We therefore distinguish between \emph{strictly measurement-aware} ASes, where all probes within the AS exhibit consistent behavior, and \emph{partially measurement-aware} ASes, where the observed behavior varies across locations within the network.
+
+Under normal ROV deployment, invalid routes should be treated consistently regardless of whether they are associated with a measurement platform. Consequently, an AS that rejects only publicly known invalid prefixes while continuing to accept equivalent shadow prefixes exhibits behavior that is difficult to explain through ordinary ROV policies alone and is instead consistent with measurement awareness.
+
+Our measurements identify X strictly measurement-aware ASes and an additional Y partially measurement-aware ASes. We further compare these networks against publicly available ROV observatories. According to APNIC measurements, the average ROV score of strictly and partially measurement-aware ASes is X\% and Y\%, respectively, while RoVista reports average scores of X\% and Y\%.
+
+These observations suggest that measurement-aware behavior may influence the outputs of public compliance and reputation frameworks. Networks exhibiting such behavior may appear more secure to customers and peers than their actual deployment practices would suggest, potentially affecting upstream selection and trust decisions throughout the ecosystem.
+
+\section{Discussion}
+
+\subsection{Beyond ROV}
+
+Although our evaluation focuses on ROV, the underlying vulnerability is not specific to routing security measurements. We do not experimentally evaluate the following domains; rather, they illustrate how measurement-aware behavior could affect a broader class of Internet observatories.
+
+Source Address Validation (SAV) provides one example. Projects such as CAIDA's Spoofer ~\cite{spoofer} rely on a publicly known set of monitoring destinations to evaluate the Internet's susceptibility to IP spoofing, and these measurements are subsequently incorporated into initiatives such as the MANRS Observatory ~\cite{manrs,manrsmetric}. An operator seeking favorable SAV scores could selectively block spoofed traffic only toward known measurement destinations while continuing to permit spoofing elsewhere. Such a network would appear compliant to the observatory despite lacking comprehensive SAV deployment.
+
+Censorship measurements face similar challenges. A censoring network aware of the addresses used by measurement platforms could selectively permit traffic originating from known probes while continuing to restrict access for ordinary users. Measurement platforms would observe successful connectivity, whereas users within the network would continue to experience censorship.
+
+Performance measurements may also be vulnerable. Traffic originating from known measurement infrastructure could be prioritized through dedicated QoS policies, resulting in latency, packet loss, and throughput measurements that do not accurately reflect the experience of ordinary users.
+
+Taken together, these examples suggest that measurement awareness may represent a general challenge for Internet observatories whenever measurement infrastructures are stable, identifiable, and associated with incentives for favorable outcomes.
+
+\subsection{Mitigations}
+
+Mitigating measurement-aware behavior is challenging because the properties that make Internet observatories valuable, openness, reproducibility, and long-term stability, also make them easier to identify. Consequently, eliminating measurement awareness entirely may be incompatible with the goals of Internet measurement itself.
+
+One possible approach is to increase the diversity and unpredictability of measurement infrastructures. Rotating measurement targets, expanding the set of vantage points, and avoiding long-term dependence on a small number of publicly known destinations can increase the difficulty of identifying measurement activity.
+
+A complementary approach is to incorporate hidden or ephemeral measurement targets alongside publicly documented infrastructures. Comparing observations obtained from public and undisclosed targets, as in our paired-target methodology, can help identify discrepancies that may indicate strategic behavior.
+
+Finally, observatories may benefit from explicitly modeling measurement awareness as a potential source of bias when interpreting results. Rather than treating measurements as direct observations of network properties, future studies may need to account for the possibility that measured networks adapt their behavior in response to the measurement process itself.
+
+\subsection{Future works}
+
+Our study focuses on ROV as a representative case study, but measurement-aware behavior may affect a much broader range of Internet observatories. An important direction for future work is to evaluate the prevalence of such behavior in other domains, such as SAV, censorship, and network performance studies.
+
+Another open challenge is the design of measurement infrastructures that preserve reproducibility and transparency while reducing their susceptibility to strategic manipulation. Developing methodologies that can detect, quantify, and mitigate measurement-aware behavior remains an important research problem for the Internet measurement community.
+
+\section{Conclusion}
+
+Internet observatories implicitly assume that measured networks behave consistently toward measurement infrastructure and ordinary users. In this paper, we introduced the notion of \emph{measurement-aware networks}, in which operators recognize measurement activity and selectively adapt their behavior to influence observed outcomes. Using ROV as a case study, we proposed a paired-target methodology based on public and shadow measurement targets and identified networks exhibiting behavior consistent with measurement awareness. Our findings suggest that Internet observatories may increasingly measure the behavior networks choose to expose to measurement platforms rather than the underlying properties they intend to characterize. Future measurement studies should therefore consider strategic behavior by measured networks as an additional source of measurement bias.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{hotnets26/hotnets26-template}
+
+\end{document}
