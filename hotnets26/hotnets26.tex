@@ -222,7 +222,7 @@ Although our evaluation focuses on ROV, the underlying vulnerability is not spec
 
 Source Address Validation (SAV) provides one example. Projects such as CAIDA's Spoofer ~\cite{spoofer} rely on a publicly known set of monitoring destinations to evaluate the Internet's susceptibility to IP spoofing, and these measurements are subsequently incorporated into initiatives such as the MANRS Observatory ~\cite{manrs,manrsmetric}. An operator seeking favorable SAV scores could selectively block spoofed traffic only toward known measurement destinations while continuing to permit spoofing elsewhere. Such a network would appear compliant to the observatory despite lacking comprehensive SAV deployment.
 
-Censorship measurements face similar challenges. A censoring network aware of the addresses used by measurement platforms could selectively permit traffic originating from known probes while continuing to restrict access for ordinary users. Measurement platforms would observe successful connectivity, whereas users within the network would continue to experience censorship.
+Censorship measurements face similar challenge of stable vantage points~\cite{censoredplanet}. A censoring network aware of the addresses used by measurement platforms could selectively permit traffic originating from known probes while continuing to restrict access for ordinary users. Measurement platforms would observe successful connectivity, whereas users within the network would continue to experience censorship.
 
 Performance measurements may also be vulnerable. Traffic originating from known measurement infrastructure could be prioritized through dedicated QoS policies, resulting in latency, packet loss, and throughput measurements that do not accurately reflect the experience of ordinary users.
 
@@ -249,6 +249,6 @@ Another open challenge is the design of measurement infrastructures that preserv
 Internet observatories implicitly assume that measured networks behave consistently toward measurement infrastructure and ordinary users. In this paper, we introduced the notion of \emph{measurement-aware networks}, in which operators recognize measurement activity and selectively adapt their behavior to influence observed outcomes. Using ROV as a case study, we proposed a paired-target methodology based on public and shadow measurement targets and identified networks exhibiting behavior consistent with measurement awareness. Our findings suggest that Internet observatories may increasingly measure the behavior networks choose to expose to measurement platforms rather than the underlying properties they intend to characterize. Future measurement studies should therefore consider strategic behavior by measured networks as an additional source of measurement bias.
 
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{hotnets26/hotnets26-template}
+\bibliography{./hotnets26.bib}
 
 \end{document}
