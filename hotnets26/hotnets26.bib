@@ -308,13 +308,6 @@ series = {IMC '23}
     abstract =  {This paper discusses a simple, effective, and straightforward method for using ingress traffic filtering to prohibit DoS (Denial of Service) attacks which use forged IP addresses to be propagated from 'behind' an Internet Service Provider's (ISP) aggregation point. This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.},
 }
 
-@misc{mlab,
-  author       = {{Measurement Lab}},
-  title        = {{Measurement Lab (M-Lab)}},
-  year         = {2026},
-  note         = {[Online]. Available: \url{https://www.measurementlab.net/}. Accessed: 2026-06-26}
-}
-
 @misc{caida_asrank,
   author       = {{CAIDA}},
   title        = {{AS Rank}},
@@ -322,3 +315,138 @@ series = {IMC '23}
   note         = {Accessed: 2026-06-29},
   year         = {2026}
 }
+
+@inproceedings{clark,
+  author    = {David D. Clark and Matthew Luckie and K. C. Claffy},
+  title     = {{The Current State of the Art in Network Measurement}},
+  booktitle = {Proceedings of the 53rd Research Conference on Communication, Information and Internet Policy (TPRC)},
+  year      = {2025},
+  month     = aug,
+  doi       = {10.2139/ssrn.5375475},
+  url       = {https://ssrn.com/abstract=5375475}
+}
+
+@inproceedings{zoom,
+author = {Michel, Oliver and Sengupta, Satadal and Kim, Hyojoon and Netravali, Ravi and Rexford, Jennifer},
+title = {Enabling passive measurement of zoom performance in production networks},
+year = {2022},
+isbn = {9781450392594},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3517745.3561414},
+doi = {10.1145/3517745.3561414},
+abstract = {Video-conferencing applications impose high loads and stringent performance requirements on the network. To better understand and manage these applications, we need effective ways to measure performance in the wild. For example, these measurements would help network operators in capacity planning, troubleshooting, and setting QoS policies. Unfortunately, large-scale measurements of production networks cannot rely on end-host cooperation, and an in-depth analysis of packet traces requires knowledge of the header formats. Zoom is one of the most sophisticated and popular applications, but it uses a proprietary network protocol. In this paper, we demystify how Zoom works at the packet level, and design techniques for analyzing Zoom performance from packet traces. We conduct systematic controlled experiments to discover the relevant unencrypted fields in Zoom packets, as well as how to group streams into meetings and how to identify peer-to-peer meetings. We show how to use the header fields to compute metrics like media bit rates, frame sizes and rates, and latency and jitter, and demonstrate the value of these fine-grained metrics on a 12-hour trace of Zoom traffic on our campus network.},
+booktitle = {Proceedings of the 22nd ACM Internet Measurement Conference},
+pages = {244–260},
+numpages = {17},
+keywords = {zoom, video conferencing, reverse engineering, protocol analysis, network performance, measurement},
+location = {Nice, France},
+series = {IMC '22}
+}
+
+@article{mlab,
+author = {Gill, Phillipa and Diot, Christophe and Ohlsen, Lai Yi and Mathis, Matt and Soltesz, Stephen},
+title = {M-Lab: user initiated internet data for the research community},
+year = {2022},
+issue_date = {January 2022},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {52},
+number = {1},
+issn = {0146-4833},
+url = {https://doi.org/10.1145/3523230.3523236},
+doi = {10.1145/3523230.3523236},
+abstract = {Measurement Lab (M-Lab) is an open, distributed server platform on which researchers have deployed measurement tools. Its mission is to measure the Internet, save the data and make it universally accessible and useful. This paper serves as an update on the MLab platform 10+ years after its initial introduction to the research community [5]. Here, we detail the current state of the M-Lab distributed platform, highlights existing measurements/data available on the platform, and describes opportunities for further engagement between the networking research community and the platform.},
+journal = {SIGCOMM Comput. Commun. Rev.},
+month = mar,
+pages = {34–37},
+numpages = {4},
+keywords = {Network measurement}
+}
+
+@inproceedings{bashir,
+author = {Bhaskar, Abhishek and Pearce, Paul},
+title = {Understanding Routing-Induced Censorship Changes Globally},
+year = {2024},
+isbn = {9798400706363},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3658644.3670336},
+doi = {10.1145/3658644.3670336},
+abstract = {Internet censorship is pervasive, with significant effort dedicated to understanding what is censored, and where. Prior censorship measurements however have identified significant inconsistencies in their results; experiments show unexplained non-deterministic behaviors thought to be caused by censor load, end-host geographic diversity, or incomplete censorship—inconsistencies which impede reliable, repeatable and correct understanding of global censorship. In this work we investigate the extent to which Equal-cost Multi-path (ECMP) routing is the cause for these inconsistencies, developing methods to measure and compensate for them.We find ECMP routing significantly changes observed censorship across protocols, censor mechanisms, and in 17 countries. We identify that previously observed non-determinism or regional variations are attributable to measurements between fixed end-hosts taking different routes based on Flow-ID; i.e., choice of intra-subnet source IP or ephemeral source port changes observed censorship. By developing new route-stable censorship measurement methods that allow consistent measurement of DNS, HTTP, and HTTPS censorship, we find ECMP routing yields censorship changes across 42\% of IPs and 51\% of ASes, but that impact is not uniform. We also develop an application-level traceroute tool to construct network paths using specific censored packets, thus identifying numerous causes of differences, ranging from likely failed infrastructure, to routes to the same end-host taking geographically diverse paths which experience differences in censorship en-route. Finally, we examine our results in the context of prior global measurement studies, exploring the applicability of our findings to prior observed variations, and then demonstrating how specific experiments from two studies could be impacted by, and specific results are explainable by, ECMP routing. Our work points to methods for improving future studies, reducing inconsistencies and increasing repeatability.},
+booktitle = {Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security},
+pages = {437–451},
+numpages = {15},
+keywords = {censorship measurement, internet censorship, routing},
+location = {Salt Lake City, UT, USA},
+series = {CCS '24}
+}
+
+@inproceedings {CenRL,
+author = { Le, Hieu and Huremagic, Armin and Wang, Kevin and Ensafi, Roya and Raman, Ram Sundara },
+booktitle = { 2026 IEEE Symposium on Security and Privacy (SP) },
+title = {{ CenRL: A Framework for Performing Intelligent Censorship Measurements }},
+year = {2026},
+volume = {},
+ISSN = {2375-1207},
+pages = {3816-3834},
+abstract = { Active Internet measurements are crucial for exposing the increasing frequency and severity of global Internet censorship. However, current measurement efforts are constrained by limited resources and time, and reacting to new censorship events remains a largely manual process reliant on rapid signals. As a result, creating a comprehensive and real-time picture of Internet censorship remains a key challenge. In this work, we introduce CenRL, an intelligent censorship measurement framework that leverages reinforcement learning to optimize and automate censorship measurements. We model the censorship measurement process as a multi-armed bandit problem and design CenRL agents to address two key tasks: maximizing the detection of blocked websites within a network and automatically responding to blocking changes in dynamic censorship environments. We demonstrate CenRL's effectiveness through realistic simulated experiments in three highly censored regions (China, Russia, and Kazakhstan) and real-world censorship measurements across vantage points in 15 countries with diverse censorship policies. Our controlled experiments demonstrate that CenRL significantly outperforms the state of the art measurement processes, finding 75% of blocked websites in less than half the number of measurements while identifying censorship changes up to seven times faster. Our real-world experiments confirm this advantage across multiple censorship environments, showing that CenRL can find 2.5 times more blocked websites on average compared to existing measurement strategies. Our study demonstrates the potential of using reinforcement learning to provide deeper insights into restrictions on online freedom. },
+keywords = {},
+doi = {10.1109/SP63933.2026.00098},
+url = {https://doi.ieeecomputersociety.org/10.1109/SP63933.2026.00098},
+publisher = {IEEE Computer Society},
+address = {Los Alamitos, CA, USA},
+month =May}
+
+@inproceedings{iris,
+author = {Pearce, Paul and Jones, Ben and Li, Frank and Ensafi, Roya and Feamster, Nick and Weaver, Nick and Paxson, Vern},
+title = {Global measurement of DNS manipulation},
+year = {2017},
+isbn = {9781931971409},
+publisher = {USENIX Association},
+address = {USA},
+abstract = {Despite the pervasive nature of Internet censorship and the continuous evolution of how and where censorship is applied, measurements of censorship remain comparatively sparse. Understanding the scope, scale, and evolution of Internet censorship requires global measurements, performed at regular intervals. Unfortunately, the state of the art relies on techniques that, by and large, require users to directly participate in gathering these measurements, drastically limiting their coverage and inhibiting regular data collection. To facilitate large-scale measurements that can fill this gap in understanding, we develop Iris, a scalable, accurate, and ethical method to measure global manipulation of DNS resolutions. Iris reveals widespread DNS manipulation of many domain names; our findings both confirm anecdotal or limited results from previous work and reveal new patterns in DNS manipulation.},
+booktitle = {Proceedings of the 26th USENIX Conference on Security Symposium},
+pages = {307–323},
+numpages = {17},
+location = {Vancouver, BC, Canada},
+series = {SEC'17}
+}
+
+@article{openvpn,
+author = {Xue, Diwen and Ramesh, Reethika and Jain, Arham and Kallitsis, Michaelis and Halderman, J. Alex and Crandall, Jedidiah R. and Ensafi, Roya},
+title = {OpenVPN is Open to VPN Fingerprinting},
+year = {2024},
+issue_date = {January 2025},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {68},
+number = {1},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/3618117},
+doi = {10.1145/3618117},
+abstract = {VPN adoption has seen steady growth over the past decade due to increased public awareness of privacy and surveillance threats. In response, certain governments are attempting to restrict VPN access by identifying connections using “dual use” DPI technology. To investigate the potential for VPN blocking, we develop mechanisms for accurately fingerprinting connections using OpenVPN, the most popular protocol for commercial VPN services. We identify three fingerprints based on protocol features such as byte pattern, packet size, and server response. Playing the role of an attacker who controls the network, we design a two-phase framework that performs passive fingerprinting and active probing in sequence. We evaluate our framework in partnership with a million-user ISP and find that we identify over 85\% of OpenVPN flows with only negligible false positives, suggesting that OpenVPN-based services can be effectively blocked with little collateral damage. Although some commercial VPNs implement countermeasures to avoid detection, our framework successfully identified connections to 34 out of 41 “obfuscated” VPN configurations. We discuss the implications of the VPN fingerprintability for different threat models and propose short-term defenses. In the longer term, we urge commercial VPN providers to be more transparent about their obfuscation approaches and to adopt more principled detection countermeasures, such as those developed in censorship circumvention research.},
+journal = {Commun. ACM},
+month = dec,
+pages = {79–87},
+numpages = {9}
+}
+
+@inproceedings{peering,
+author = {Schlinker, Brandon and Zarifis, Kyriakos and Cunha, Italo and Feamster, Nick and Katz-Bassett, Ethan},
+title = {PEERING: An AS for Us},
+year = {2014},
+isbn = {9781450332569},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2670518.2673887},
+doi = {10.1145/2670518.2673887},
+abstract = {Internet routing suffers from persistent and transient failures, circuitous routes, oscillations, and prefix hijacks. A major impediment to progress is the lack of ways to conduct impactful interdomain research. Most research is based either on passive observation of existing routes, keeping researchers from assessing how the Internet will respond to route or policy changes; or simulations, which are restricted by limitations in our understanding of topology and policy.We propose a new class of interdomain research: researchers can instantiate an AS of their choice, including its intradomain topology and interdomain interconnectivity, and connect it with the "live" Internet to exchange routes and traffic with real interdomain neighbors. Instead of being observers of the Internet ecosystem, researchers become members. Towards this end, we present the Peering testbed. In its nascent stage, the testbed has proven extremely useful, resulting in a series of studies that were nearly impossible for researchers to conduct in the past. In this paper, we present a vision of what the testbed can provide. We sketch how to extend the testbed to enable future innovation, taking advantage of the rise of IXPs to expand our testbed.},
+booktitle = {Proceedings of the 13th ACM Workshop on Hot Topics in Networks},
+pages = {1–7},
+numpages = {7},
+location = {Los Angeles, CA, USA},
+series = {HotNets-XIII}
+}
+
+
