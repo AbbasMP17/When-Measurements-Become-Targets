@@ -51,13 +51,13 @@ series = {CCS '19}
 }
 
 @misc{ipv6,
-      title={Your Router is My Prober: Measuring IPv6 Networks via ICMP Rate Limiting Side Channels}, 
+      title={Your Router is My Prober: Measuring IPv6 Networks via ICMP Rate Limiting Side Channels},
       author={Long Pan and Jiahai Yang and Lin He and Zhiliang Wang and Leyao Nie and Guanglei Song and Yaozhong Liu},
       year={2023},
       eprint={2210.13088},
       archivePrefix={arXiv},
       primaryClass={cs.NI},
-      url={https://arxiv.org/abs/2210.13088}, 
+      url={https://arxiv.org/abs/2210.13088},
 }
 
 @misc{ripe_ris,
@@ -254,8 +254,16 @@ series = {IMC '23}
   urldate = {2026-06-26}
 }
 
+@online{apnic_rpki_measure,
+  author  = {Huston, Geoff},
+  title   = {{How we measure RPKI ROA signing and Route Origin Validation}},
+  year    = {2023},
+  month   = nov,
+  url     = {https://blog.apnic.net/2023/11/09/how-we-measure-rpki-roa-signing-and-route-origination-validation/}
+}
+
 @online{isbgpsafeyet,
-  author  = {{IIJ Research Lab}},
+  author  = {{Cloudflare}},
   title   = {{Is BGP Safe Yet?}},
   year    = {2026},
   url     = {https://isbgpsafeyet.com/},
@@ -449,4 +457,168 @@ location = {Los Angeles, CA, USA},
 series = {HotNets-XIII}
 }
 
+
+@article{goodhart,
+  author = {Charles A. E. Goodhart},
+  title = {Problems of Monetary Management: The UK Experience},
+  journal = {Papers in Monetary Economics},
+  year = {1975},
+  volume = {1},
+  pages = {91--121}
+}
+
+@article{campbell,
+  author = {Donald T. Campbell},
+  title = {Assessing the Impact of Planned Social Change},
+  journal = {Evaluation and Program Planning},
+  year = {1979},
+  volume = {2},
+  number = {1},
+  pages = {67--90}
+}
+
+@misc{ihr,
+  title = {Internet Health Report},
+  author = {{IIJ Research Laboratory}},
+  year = {2020},
+  howpublished = {\url{https://ihr.iijlab.net}}
+}
+
+@inproceedings {ooni,
+title = {{OONI}: Open Observatory of Network Interference},
+booktitle = {2nd USENIX Workshop on Free and Open Communications on the Internet (FOCI 12)},
+year = {2012},
+address = {Bellevue, WA},
+url = {https://www.usenix.org/conference/foci12/workshop-program/presentation/Filast{\`o}},
+publisher = {USENIX Association},
+month = aug
+}
+
+@inproceedings{aspa,
+  author    = {Justin Furuness and Cameron Morris and Reynaldo Morillo and
+               Arvind Kasiliya and Bing Wang and Amir Herzberg},
+  title     = {Securing {BGP} ASAP: {ASPA} and other Post-{ROV} Defenses},
+  booktitle = {Network and Distributed System Security (NDSS) Symposium},
+  year      = {2025},
+  address   = {San Diego, CA, USA},
+  pages      = {1--14},
+  publisher = {Internet Society},
+  doi        = {10.14722/ndss.2025.240675},
+  url        = {https://dx.doi.org/10.14722/ndss.2025.240675}
+}
+
+@inproceedings{randy,
+  author    = {Nils Rodday and
+               {\'I}talo S. Cunha and
+               Randy Bush and
+               Ethan Katz{-}Bassett and
+               Gabi Dreo Rodosek and
+               Thomas C. Schmidt and
+               Matthias W{\"a}hlisch},
+  title     = {Revisiting RPKI Route Origin Validation on the Data Plane},
+  booktitle = {5th Network Traffic Measurement and Analysis Conference (TMA 2021)},
+  publisher = {IFIP},
+  year      = {2021}
+}
+
+@inproceedings {friends,
+author = {Tomas Hlavacek and Haya Shulman and Niklas Vogel and Michael Waidner},
+title = {Keep Your Friends Close, but Your Routeservers Closer: Insights into {RPKI} Validation in the Internet},
+booktitle = {32nd USENIX Security Symposium (USENIX Security 23)},
+year = {2023},
+isbn = {978-1-939133-37-3},
+address = {Anaheim, CA},
+pages = {4841--4858},
+url = {https://www.usenix.org/conference/usenixsecurity23/presentation/hlavacek},
+publisher = {USENIX Association},
+month = aug
+}
+
+@misc{rovistaweb,
+  author       = {{NetSecure Lab}},
+  title        = {{ROVISTA}: Route Origin Validation Inference and Status Tracking},
+  howpublished = {\url{https://rovista.netsecurelab.org/}},
+  note         = {Accessed: 2026-07-04}
+}
+
+@inproceedings{asrogue,
+  author    = {Yi Xu and
+               Yihao Chen and
+               Ke Xu and
+               Qi Li and
+               Jianping Wu},
+  title     = {{ASRogue}: Manipulating ASRank-Inferred AS Relationships},
+  booktitle = {Proceedings of the 35th USENIX Security Symposium (USENIX Security '26)},
+  year      = {2026},
+  publisher = {USENIX Association},
+  note       = {To appear}
+}
+
+@misc{byoip,
+  author       = {{Cloudflare}},
+  title        = {Bring Your Own IPs (BYOIP)},
+  year         = {2026},
+  howpublished = {\url{https://developers.cloudflare.com/byoip/}},
+  note         = {Cloudflare Developer Documentation. Accessed: 2026-07-10}
+}
+
+@inproceedings{geolocation,
+author = {Abdou, AbdelRahman and Matrawy, Ashraf and van Oorschot, Paul C.},
+title = {Accurate Manipulation of Delay-based Internet Geolocation},
+year = {2017},
+isbn = {9781450349444},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3052973.3052993},
+doi = {10.1145/3052973.3052993},
+abstract = {Delay-based Internet geolocation techniques are repeatedly positioned as well suited for security-sensitive applications, e.g., location-based access control, and credit-card verification. We present new strategies enabling adversaries to accurately control the forged location. Evaluation showed that using the new strategies, adversaries could misrepresent their true locations by over 15000km, and in some cases within 100km of an intended geographic location. This work significantly improves the adversary's control in misrepresenting its location, directly refuting the appropriateness of current techniques for security-sensitive applications. We finally discuss countermeasures to mitigate such strategies.},
+booktitle = {Proceedings of the 2017 ACM on Asia Conference on Computer and Communications Security},
+pages = {887–898},
+numpages = {12},
+keywords = {geolocation, internet measurements, location verification, location-aware authentication, location-based services},
+location = {Abu Dhabi, United Arab Emirates},
+series = {ASIA CCS '17}
+}
+
+@inproceedings {nethide,
+author = {Roland Meier and Petar Tsankov and Vincent Lenders and Laurent Vanbever and Martin Vechev},
+title = {{NetHide}: Secure and Practical Network Topology Obfuscation},
+booktitle = {27th USENIX Security Symposium (USENIX Security 18)},
+year = {2018},
+isbn = {978-1-939133-04-5},
+address = {Baltimore, MD},
+pages = {693--709},
+url = {https://www.usenix.org/conference/usenixsecurity18/presentation/meier},
+publisher = {USENIX Association},
+month = aug
+}
+
+@INPROCEEDINGS{topologydeception,
+  author={Trassare, Samuel T. and Beverly, Robert and Alderson, David},
+  booktitle={MILCOM 2013 - 2013 IEEE Military Communications Conference},
+  title={A Technique for Network Topology Deception},
+  year={2013},
+  volume={},
+  number={},
+  pages={1795-1800},
+  keywords={Network topology;Topology;Probes;IP networks;Kernel;Ports (Computers);Web servers;Topological deception;military deception;traceroute;network defense},
+  doi={10.1109/MILCOM.2013.303}}
+
+@inproceedings{lightscope,
+author = {Kapitanski, Eric and Mirkovic, Jelena},
+title = {Lightscope: Turning Production Machines into Telescopes and Honeypots},
+year = {2026},
+isbn = {9798400723278},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3777912.3839790},
+doi = {10.1145/3777912.3839790},
+abstract = {Traffic to unused IP addresses (dark spaces), including passive and reactive network telescopes and honeynets, has traditionally been used to study malicious activities. However, attackers may avoid known dark space sensors and preferentially target endpoints hosting legitimate services. We present LightScope, a lightweight application that unifies passive observation at Layer 4 with selective proxying to a remote Layer 7 honeypot. LightScope does this by leveraging a subset of the unused ports on production servers. By embedding measurement on the production hosts themselves, LightScope creates a new vantage point for observing various scanner populations, port-targeting profiles, and post-login behaviors that are only partially visible from dark-space telescopes and honeynets. In this paper we analyze two months of data collected from 235 LightScope deployments. We show that LightScope contributes new knowledge about widely observed scanners, their port scan strategies and their post-exploit activities. These scanners interact with production endpoints running LightScope differently than they do with other vantage points. In our study period, LightScope also exclusively observes 64,686 scanners not present at other vantage points. By instrumenting production machines, LightScope provides complementary visibility to existing telescopes and honeynets.},
+booktitle = {Proceedings of the 2026 ACM Internet Measurement Conference},
+pages = {228–245},
+numpages = {18},
+keywords = {telescope, scan monitoring, honeypot, malicious activity, threat intelligence, cyber deception},
+location = {Karlsruhe, Germany},
+series = {IMC '26}
+}
 

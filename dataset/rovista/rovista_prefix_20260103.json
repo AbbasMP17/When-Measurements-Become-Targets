@@ -1,0 +1,1 @@
+[{"asn": 1, "recordDate": "2026-01-03", "targetAsn": 23650, "targetIp": "103.71.69.90", "filter": 0, "prefix": "103.71.69.0/24"}, {"asn": 1, "recordDate": "2026-01-03", "targetAsn": 23650, "targetIp": "180.210.213.49", "filter": 0, "prefix": "180.210.213.0/24"}]

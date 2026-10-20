@@ -1,0 +1,99 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram id="rov-aslevel" name="ROV AS-level">
+    <mxGraphModel dx="1884" dy="1139" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="902" pageHeight="444" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rovp" parent="1" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;fontStyle=1;fontSize=17;" value="ROV Probes" vertex="1">
+          <mxGeometry height="24" width="104" x="8" y="176" as="geometry" />
+        </mxCell>
+        <mxCell id="ripe" parent="1" style="rounded=1;absoluteArcSize=1;whiteSpace=nowrap;html=1;arcSize=20;dashed=1;strokeWidth=1.5;fillColor=#EEF2FD;strokeColor=#4A6CF0;fontStyle=1;fontSize=17;fontFamily=Helvetica;fontColor=#000000;" value="RIPE Atlas" vertex="1">
+          <mxGeometry height="120" width="104" x="8" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="maas" parent="1" style="rounded=1;absoluteArcSize=1;whiteSpace=nowrap;html=1;arcSize=24;container=1;collapsible=0;fillColor=#FFFFFF;strokeColor=#E3262B;strokeWidth=2.5;verticalAlign=top;fontStyle=1;fontSize=17;spacingTop=3;fontFamily=Helvetica;fontColor=#000000;" value="Measurement-Aware AS (MA-AS)" vertex="1">
+          <mxGeometry height="336" width="346" x="128" y="22" as="geometry" />
+        </mxCell>
+        <mxCell id="rules" parent="maas" style="rounded=1;absoluteArcSize=1;whiteSpace=nowrap;html=1;arcSize=16;container=1;collapsible=0;fillColor=#F5F5F5;strokeColor=#BBBBBB;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=8;spacingTop=2;fontSize=16;fontFamily=Helvetica;fontColor=#000000;" value="&lt;font color=&quot;#2848B8&quot;&gt;&lt;b&gt;!--- Target-Specific ROV Filtering ---&lt;/b&gt;&lt;/font&gt;&lt;br&gt;Filter Cloudflare RPKI-invalid public targets:&lt;br&gt;103.21.244.0/24, 2606:4700:7000::/48" vertex="1">
+          <mxGeometry height="166" width="330" x="8" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="code" parent="rules" style="rounded=1;absoluteArcSize=1;whiteSpace=nowrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#CCCCCC;strokeWidth=1.5;align=left;verticalAlign=middle;spacingLeft=10;fontFamily=Courier New;fontSize=14;fontColor=#000000;" value="ip prefix-list ROV-INV deny&lt;br&gt;&amp;nbsp;103.21.244.0/24&lt;br&gt;&amp;nbsp;2606:4700:7000::/48&lt;br&gt;router bgp MA-AS&lt;br&gt;&amp;nbsp;neighbor X prefix-list ROV-INV in" vertex="1">
+          <mxGeometry height="92" width="318" x="6" y="68" as="geometry" />
+        </mxCell>
+        <mxCell id="xmark" parent="maas" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;fontStyle=1;fontSize=20;fontColor=#E3262B;" value="X" vertex="1">
+          <mxGeometry height="24" width="20" x="250" y="266" as="geometry" />
+        </mxCell>
+        <mxCell id="dropped" parent="maas" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;fontSize=14;fontColor=#E3262B;" value="dropped inside&lt;br&gt;the MA-AS" vertex="1">
+          <mxGeometry height="38" width="108" x="206" y="292" as="geometry" />
+        </mxCell>
+        <mxCell id="peer" parent="1" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#444444;" value="direct&lt;br&gt;peering" vertex="1">
+          <mxGeometry height="36" width="66" x="478" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud" parent="1" style="shape=stencil(lVnLctswDPwaXzMEwec5bf/DdZTGU8fO2E7S/n2pyq/hKovxKZaUFQBiCSyohT4eXpZvw8K77fJ1WOi3hferze79qf1tNz+nOxrddP1yunZlul4e3obVcbr5sdyvlz83w/TkcNzvfg+f66fjCbPevgz79XF8qt8X+rjabbcNu95tDwv/Y7r3vNsPv/a79+3TdP22HNHjr9fdx+jkn+ld0T24k0d/pzs+PeT4/87pVZv19gYQYg9Q5QB/fnwBlAfPAHJ+fAa0V5yWbR4AMbSoqAXXW4g8aK19DDFTC3rx+AKo1ILPPSB5akFqH0Mq52WYB2gPyIECcv//xUhDn4VSeQT9mtZIlwiSJo4HALQQ8dSCAKC9g/KiT5r4StcI1lQ0U0AFC0F4mhMEESpHAJMkeopAskrbD3ShgByS5F4bKVI+zRAkC893ABvZ4KwDRMk0jgKB12hsu74gO29wCgDZAHQxNNrSqEu/U1vUnFLYVbyRCugSo58Ukfp0j53oPoJYrajVtN4roxcpRh4SR0SwcW3KX7WvPoGRJzBi5DFSr2YQSbgNj0qCb42Iq9s2LPMqOURwJibo3L4EaqNAF/DV8RqdwEblOReJfQrV8dBFwYo6XhAlQi9Qx3WLZFRrztjrNSCEb93mGTqW+E5sexsgXHj6kNEx3s99ApFkpXIkYES+UCsFCVMMKxX3fDFWrGKdL4F3aZcQwmmpIgDJXG+o4J7Mashp6NSj3KWOeci+T3znq2IJi7yEqSJhIqel6kxTsazAfrkZSb60As0u3B2L8kFKFYulNzimEayIEQvOa62CGhCQ5t4ZjgUU59Wg5VVZX+WgwbEA5BejhSnO6JKS6Rgo9GpAUKkaOkRDxOnEmXnprZi0LJAXk2MeIGKoMJR64qw6lucmUrrIAhVGnDesQE22WCllZhK3KnI/6xtFDIfrbJ2IIIJP46NXHSIZecfh15C5iqciFukdzFuBC+Mb0XHRIXwE9HOSymj2cGjmeVW5kcHXNmQqnb7YiyGnsAzxKjQKMBiweRxRcezniJCwBHOEYm00FK5HJWVk0M/MzDwfM1N2NgZgEAVqnCbhbKPGBFH1bhv3nkFLwfpezbkGmgiftxKIDk4SQf2gxoEs7EBnnJFA+nitGsfMfBfgOlJdlokCKk5l/DQMDn25kMlQCHknS+g/L7URpgRg0mqzOwyXq/bj+i3leb3ZTJ9nbp/3317arenTkH7/Bw==);whiteSpace=nowrap;html=1;container=1;collapsible=0;fillColor=#F5F5F5;strokeColor=#555555;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;spacingBottom=-2;fontStyle=1;fontSize=17;fontFamily=Helvetica;fontColor=#000000;" value="Cloudflare (AS13335)" vertex="1">
+          <mxGeometry height="308" width="350" x="542" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="valid" parent="cloud" style="rounded=1;absoluteArcSize=1;whiteSpace=nowrap;html=1;arcSize=10;fillColor=#DAE8FC;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=16;fontFamily=Helvetica;fontColor=#000000;" value="Cloudflare RPKI-Valid&lt;br&gt;Control Target" vertex="1">
+          <mxGeometry height="52" width="196" x="90" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="invalid" parent="cloud" style="rounded=1;absoluteArcSize=1;whiteSpace=nowrap;html=1;arcSize=10;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=1.5;fontSize=16;fontFamily=Helvetica;fontColor=#000000;" value="Cloudflare RPKI-Invalid&lt;br&gt;Public Target" vertex="1">
+          <mxGeometry height="52" width="196" x="90" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="byoipas" parent="cloud" style="rounded=1;absoluteArcSize=1;whiteSpace=nowrap;html=1;arcSize=12;container=1;collapsible=0;dashed=1;strokeWidth=1.5;fillColor=none;strokeColor=#666666;verticalAlign=top;fontStyle=1;fontSize=16;spacingTop=1;fontFamily=Helvetica;fontColor=#000000;" value="AS209242 (BYOIP)" vertex="1">
+          <mxGeometry height="92" width="196" x="90" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="shadow" parent="byoipas" style="rounded=1;absoluteArcSize=1;whiteSpace=nowrap;html=1;arcSize=10;fillColor=#B8B8B8;strokeColor=#4A6CF0;strokeWidth=1.5;fontSize=16;fontFamily=Helvetica;fontColor=#000000;" value="BYOIP RPKI-Invalid&lt;br&gt;Shadow Targets" vertex="1">
+          <mxGeometry height="52" width="176" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e_valid" edge="1" parent="1" source="ripe" style="html=1;rounded=0;dashed=1;dashPattern=5 3;strokeWidth=3;endFill=1;strokeColor=#3B5BDB;endArrow=block;endSize=6;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="valid" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="606" y="228" />
+              <mxPoint x="606" y="106" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_shadow" edge="1" parent="1" source="ripe" style="html=1;rounded=0;dashed=1;dashPattern=5 3;strokeWidth=3;endFill=1;strokeColor=#1A1A1A;endArrow=block;endSize=6;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="shadow" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_public" edge="1" parent="1" source="ripe" style="html=1;rounded=0;dashed=1;dashPattern=5 3;strokeWidth=3;endFill=1;strokeColor=#E3262B;endArrow=none;exitX=1;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="xmark" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="66" width="884" x="8" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="lg_a0" edge="1" parent="1" style="html=1;rounded=0;dashed=1;dashPattern=5 3;strokeWidth=3;endArrow=block;endFill=1;endSize=6;strokeColor=#3B5BDB;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="388" as="sourcePoint" />
+            <mxPoint x="80" y="388" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lg_t0" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontColor=#000000;align=left;verticalAlign=middle;whiteSpace=nowrap;fontSize=16;" value="Traffic to RPKI-Valid Control Target" vertex="1">
+          <mxGeometry height="22" width="340" x="88" y="377" as="geometry" />
+        </mxCell>
+        <mxCell id="lg_a1" edge="1" parent="1" style="html=1;rounded=0;dashed=1;dashPattern=5 3;strokeWidth=3;endArrow=block;endFill=1;endSize=6;strokeColor=#1A1A1A;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="418" as="sourcePoint" />
+            <mxPoint x="80" y="418" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lg_t1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontColor=#000000;align=left;verticalAlign=middle;whiteSpace=nowrap;fontSize=16;" value="Traffic to RPKI-Invalid Shadow Targets" vertex="1">
+          <mxGeometry height="22" width="340" x="88" y="407" as="geometry" />
+        </mxCell>
+        <mxCell id="lg_a2" edge="1" parent="1" style="html=1;rounded=0;dashed=1;dashPattern=5 3;strokeWidth=3;endArrow=none;strokeColor=#E3262B;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="388" as="sourcePoint" />
+            <mxPoint x="530" y="388" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lg_t2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontColor=#000000;align=left;verticalAlign=middle;whiteSpace=nowrap;fontSize=16;" value="Traffic to RPKI-Invalid Public Target" vertex="1">
+          <mxGeometry height="22" width="340" x="538" y="377" as="geometry" />
+        </mxCell>
+        <mxCell id="lg_x" parent="1" style="text;html=1;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;align=center;verticalAlign=middle;fontStyle=1;fontSize=18;fontColor=#E3262B;" value="X" vertex="1">
+          <mxGeometry height="24" width="20" x="500" y="406" as="geometry" />
+        </mxCell>
+        <mxCell id="lg_t3" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontColor=#000000;align=left;verticalAlign=middle;whiteSpace=nowrap;fontSize=16;" value="Dropped inside the MA-AS" vertex="1">
+          <mxGeometry height="22" width="340" x="538" y="407" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

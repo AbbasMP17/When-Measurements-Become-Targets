@@ -45,7 +45,6 @@
     I am loading acmart-preload-hook.tex. You are fully responsible
     for any problems from now on.}}{}
 \RequirePackage{xkeyval}
-\usepackage[table]{xcolor}
 \RequirePackage{xstring}
 \RequirePackage{iftex}
 \define@choicekey*+{acmart.cls}{format}[\ACM@format\ACM@format@nr]{%
@@ -670,7 +669,7 @@
        \immediate\write\@auxout{\string\bibstyle{#1}}%
      \fi}}
 \RequirePackage{graphicx}
-\RequirePackage[prologue]{xcolor}
+\RequirePackage[prologue,table]{xcolor}
 \definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
 \definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
 \definecolor[named]{ACMOrange}{cmyk}{0,0.42,1,0.01}
